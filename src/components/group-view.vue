@@ -2,7 +2,7 @@
   <div class="controls">
     <p>Let's check my ...</p>
 
-    <div v-for='group in groups' :key="group.title" class="group" :classes="{ expanded: group.expanded }">
+    <div v-for='group in groups' :key="group.title" class="group" :class="{ active: allBaselines(group) }">
       <h2 class="group-title">
         <button @click="toggleGroup(group.title)">{{group.title}}</button>
       </h2>
@@ -15,7 +15,7 @@
                 v-for='option in item.options'
                 :key="option.title"
                 class="option"
-                :class="{ active: item.baseline !== null && option.value === item.current, baseline: option.value === item.baseline }"
+                :class="{ active: allBaselines(group) && item.baseline !== null && option.value === item.current, baseline: option.value === item.baseline }"
                 @click='setCurrentOption(option, item, group) '>
               {{option.title}}
             </button>
@@ -63,8 +63,13 @@ export default {
 
 .group {
   border-radius: 5px;
+  border: 3px solid transparent;
   background-color: #ddd;
   margin-bottom: 10px;
+}
+
+.group.active {
+  border-color: #ffc107;
 }
 
 .group-title {
@@ -109,6 +114,7 @@ export default {
 }
 
 .option {
+  position: relative;
   flex: 1;
   background: #0277BD;
   border: 1px solid #004967;
@@ -134,7 +140,13 @@ export default {
   background-color: #004967;
 }
 
-.option.baseline {
-  border-color: orange;
+.option.baseline:before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  margin-left: -10px;
+  border: 10px solid transparent;
+  border-bottom-color: #ff9800;
 }
 </style>
