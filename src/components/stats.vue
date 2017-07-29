@@ -57,26 +57,50 @@ export default {
   },
   computed: {
     money() {
-      return this.$store.state.groups.reduce((total, group) => {
+      const baseline = this.$store.state.groups.reduce((total, group) => {
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + item.calcMoney(item.current)
+          return itemsTotal + (item.baseline !== null ? item.calcMoney(item.baseline) : 0)
         }, 0)
       }, 0)
+
+      const current = this.$store.state.groups.reduce((total, group) => {
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcMoney(item.current) : 0)
+        }, 0)
+      }, 0)
+
+      return baseline - current
     },
     time() {
-      return this.$store.state.groups.reduce((total, group) => {
+      const baseline = this.$store.state.groups.reduce((total, group) => {
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + item.calcTime(item.current)
+          return itemsTotal + (item.baseline !== null ? item.calcTime(item.baseline) : 0)
         }, 0)
       }, 0)
+
+      const current = this.$store.state.groups.reduce((total, group) => {
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcTime(item.current) : 0)
+        }, 0)
+      }, 0)
+
+      return baseline - current
     },
 
     enviroImpact() {
-      return this.$store.state.groups.reduce((total, group) => {
+      const baseline = this.$store.state.groups.reduce((total, group) => {
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + item.calcEnviroImpact(item.current)
+          return itemsTotal + (item.baseline !== null ? item.calcEnviroImpact(item.baseline) : 0)
         }, 0)
       }, 0)
+
+      const current = this.$store.state.groups.reduce((total, group) => {
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcEnviroImpact(item.current) : 0)
+        }, 0)
+      }, 0)
+
+      return baseline - current
     }
   }
 

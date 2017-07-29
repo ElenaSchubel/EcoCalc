@@ -46,7 +46,7 @@ export default [{
           value: 5
         },
       ],
-      current: 0,
+      current: null,
       baseline: null
     }]
   },
@@ -88,7 +88,7 @@ export default [{
             value: 1
           }
         ],
-        current: 0,
+        current: null,
         baseline: null
       },
       {
@@ -125,7 +125,7 @@ export default [{
             value: 1
           }
         ],
-        current: 0,
+        current: null,
         baseline: null
       },
 
@@ -163,7 +163,7 @@ export default [{
             value: 1
           }
         ],
-        current: 0,
+        current: null,
         baseline: null
       },
       {
@@ -200,7 +200,7 @@ export default [{
             value: 1
           }
         ],
-        current: 0,
+        current: null,
         baseline: null
       }
     ]
@@ -244,7 +244,7 @@ export default [{
             value: 1
           }
         ],
-        current: 0,
+        current: null,
         baseline: null
       },
       {
@@ -279,7 +279,7 @@ export default [{
             value: 1
           }
         ],
-        current: 0,
+        current: null,
         baseline: null
       },
       {
@@ -314,7 +314,7 @@ export default [{
             value: 1
           }
         ],
-        current: 0,
+        current: null,
         baseline: null
       }
     ]
