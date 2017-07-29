@@ -191,19 +191,19 @@ export default [{
     title: 'Transport',
 
     items: [{
-        title: 'walking and biking',
-        options: [{
-            calcMoney(current) {
-              return current
-            },
+			title: 'walking and biking',
+			calcMoney(current) {
+				return current
+			},
 
-            calcTime() {
-              return 0
-            },
+			calcTime() {
+				return 0
+			},
 
-            calcEnviroImpact(current) {
-              return current
-            },
+			calcEnviroImpact(current) {
+				return current
+			},
+			options: [{
             title: 'never',
             value: 0
           },
@@ -224,18 +224,18 @@ export default [{
       },
       {
         title: 'Public Transport',
+				calcMoney(current) {
+					return current
+				},
+
+				calcTime() {
+					return 0
+				},
+
+				calcEnviroImpact(current) {
+					return current
+				},
         options: [{
-            calcMoney(current) {
-              return current
-            },
-
-            calcTime() {
-              return 0
-            },
-
-            calcEnviroImpact(current) {
-              return current
-            },
             title: 'never',
             value: 0
           },
@@ -256,18 +256,18 @@ export default [{
       },
       {
         title: 'Private',
+				calcMoney(current) {
+					return current
+				},
+
+				calcTime() {
+					return 0
+				},
+
+				calcEnviroImpact(current) {
+					return current
+				},
         options: [{
-            calcMoney(current) {
-              return current
-            },
-
-            calcTime() {
-              return 0
-            },
-
-            calcEnviroImpact(current) {
-              return current
-            },
             title: 'never',
             value: 0
           },
