@@ -153,6 +153,7 @@ export default {
   content: "•••";
 }
 
+.stats-wrapper.minimised .heading,
 .stats-wrapper.minimised .stats,
 .stats-wrapper.minimised .actions {
   display: none;
@@ -262,6 +263,7 @@ export default {
 
 .actions {
   display: flex;
+  justify-content: center;
 }
 
 .action {
