@@ -8,9 +8,6 @@
 
 <script>
 import GroupView from './components/group-view'
-import Stats from './components/stats'
-import StatSource from './components/statsource'
-import WhatDoesItMean from './components/whatdoesitmean'
 import MapView from './components/map'
 export default {
   name: 'app',
@@ -22,9 +19,6 @@ export default {
   },
   components: {
     GroupView,
-    Stats,
-    WhatDoesItMean,
-    StatSource,
     MapView
   }
 }

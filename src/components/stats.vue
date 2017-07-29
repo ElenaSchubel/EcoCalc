@@ -25,7 +25,6 @@
 
   <div class="actions" v-show="hasStats(this.$store.state.groups)">
     <button class="action" @click='showPopup("meaning")'>What does this mean?</button>
-    <button class="action" @click='showPopup("source")'>Where are the stats from?</button>
   </div>
 </div>
 </template>
