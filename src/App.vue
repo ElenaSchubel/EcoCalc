@@ -1,17 +1,19 @@
 <template>
 <div id="app">
   <group-view/>
-
+  <stats/>
 </div>
 </template>
 
 <script>
 import GroupView from './components/group-view'
+import Stats from './components/stats'
 export default {
   name: 'app',
 
   components: {
-    GroupView
+    GroupView,
+    Stats
   }
 }
 </script>

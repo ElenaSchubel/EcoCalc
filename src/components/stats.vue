@@ -1,32 +1,41 @@
 <template>
-<div class="hello">
-  <div v-for='group in groups'><h2>{{group.title}}</h2>
-  <div v-for='item in group.items'> {{item.title}}
-  <button
-    v-for='option in item.options'
-    :class="{ active: option.value === item.current }"
-    @click='setCurrentOption(option, item, group) '>
-  {{option.title}}
-  </button>
-  </div>
-  </div>
+<div>
+  <div>{{ money }}</div>
+  <div>{{ time }}</div>
+  <div>{{ enviroImpact }}</div>
 
 </div>
+
 </template>
 
 <script>
 export default {
-  name: 'hello',
+  name: 'stats',
   computed: {
-  groups () {
-  return this.$store.state.groups
+    money() {
+      return this.$store.state.groups.reduce((total, group) => {
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + item.calcMoney(item.current)
+        }, 0)
+      }, 0)
+    },
+    time() {
+      return this.$store.state.groups.reduce((total, group) => {
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + item.calcTime(item.current)
+        }, 0)
+      }, 0)
+    },
+
+    enviroImpact() {
+      return this.$store.state.groups.reduce((total, group) => {
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + item.calcEnviroImpact(item.current)
+        }, 0)
+      }, 0)
+    }
   }
-  },
-  methods: {
-  setCurrentOption(option, item, group) {
-  this.$store.commit('setCurrentOption', {option , item, group })
-  }
-  }
+
 }
 </script>
 
