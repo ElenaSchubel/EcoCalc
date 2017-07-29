@@ -81,12 +81,123 @@ export default [
           }
         ],
         current: 0
+      }],
+
+       
+
+
+
+    },
+
+    {
+    	items: [{
+      	title: 'blankets',
+
+      	calcMoney(current) {
+      		return current * 7
+      	},
+
+      	calcTime() {
+      		return 0
+      	},
+
+      	calcEnviroImpact(current){
+      		return current
+      	},
+      	
+        options: [{
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
       }]
+    },
 
+    {
+    	items: [{
+      	title: 'wood',
 
+      	calcMoney(current) {
+      		return current * 7
+      	},
 
+      	calcTime() {
+      		return 0
+      	},
 
-      
+      	calcEnviroImpact(current){
+      		return current
+      	},
+      	
+        options: [{
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      }]
+    },
+
+    {
+    	items: [{
+      	title: 'bar heater',
+
+      	calcMoney(current) {
+      		return current * 7
+      	},
+
+      	calcTime() {
+      		return 0
+      	},
+
+      	calcEnviroImpact(current){
+      		return current
+      	},
+      	
+        options: [{
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      }]
     }
 
 
