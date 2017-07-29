@@ -43,64 +43,25 @@ export default [{
       current: 0
     }]
   },
-
   {
     title: 'heating',
 
     items: [{
-      title: 'heat pump',
+        title: 'heat pump',
 
-      calcMoney(current) {
-        return current * 7
-      },
-
-      calcTime() {
-        return 0
-      },
-
-      calcEnviroImpact(current) {
-        return current
-      },
-
-      options: [{
-          title: 'never',
-          value: 0
+        calcMoney(current) {
+          return current * 7
         },
-        {
-          title: 'occasionally',
-          value: 0.25
+
+        calcTime() {
+          return 0
         },
-        {
-          title: 'sometimes',
-          value: 0.5
+
+        calcEnviroImpact(current) {
+          return current
         },
-        {
-          title: 'lots',
-          value: 1
-        }
-      ],
-      current: 0
-    }]
-  },
 
-
-  {
-    title: 'Transport',
-
-    items: [{
-        title: 'walking and biking',
         options: [{
-            calcMoney(current) {
-              return current
-            },
-
-            calcTime() {
-              return 0
-            },
-
-            calcEnviroImpact(current) {
-              return current
-            },
             title: 'never',
             value: 0
           },
@@ -120,42 +81,10 @@ export default [{
         current: 0
       },
       {
-				title: 'Public Transport',
-      options: [{
-          calcMoney(current) {
-            return current
-          },
+        title: 'blankets',
 
-          calcTime() {
-            return 0
-          },
-
-          calcEnviroImpact(current) {
-            return current
-          },
-          title: 'never',
-          value: 0
-        },
-        {
-          title: 'occasionally',
-          value: 0.25
-        },
-        {
-          title: 'sometimes',
-          value: 0.5
-        },
-        {
-          title: 'lots',
-          value: 1
-        }
-      ],
-      current: 0
-    },
-    {
-			title: 'Private',
-    options: [{
         calcMoney(current) {
-          return current
+          return current * 7
         },
 
         calcTime() {
@@ -165,24 +94,234 @@ export default [{
         calcEnviroImpact(current) {
           return current
         },
-        title: 'never',
-        value: 0
-      },
-      {
-        title: 'occasionally',
-        value: 0.25
-      },
-      {
-        title: 'sometimes',
-        value: 0.5
-      },
-      {
-        title: 'lots',
-        value: 1
-      }
-    ],
-    current: 0
-  }
-]
 
-}]
+        options: [{
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      },
+
+      {
+        title: 'wood',
+
+        calcMoney(current) {
+          return current * 7
+        },
+
+        calcTime() {
+          return 0
+        },
+
+        calcEnviroImpact(current) {
+          return current
+        },
+
+        options: [{
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      },
+      {
+        title: 'bar heater',
+
+        calcMoney(current) {
+          return current * 7
+        },
+
+        calcTime() {
+          return 0
+        },
+
+        calcEnviroImpact(current) {
+          return current
+        },
+
+        options: [{
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      }
+    ]
+
+  },
+
+      {
+        title: 'Transport',
+
+        items: [{
+            title: 'walking and biking',
+
+            calcTime() {
+              return 0
+            },
+
+            calcEnviroImpact(current) {
+              return current
+            },
+
+            options: [{
+                title: 'never',
+                value: 0
+              },
+              {
+                title: 'occasionally',
+                value: 0.25
+              },
+              {
+                title: 'sometimes',
+                value: 0.5
+              },
+              {
+                title: 'lots',
+                value: 1
+              }
+            ],
+            current: 0
+          },
+
+          {
+            title: 'Transport',
+
+            items: [{
+                title: 'walking and biking',
+                options: [{
+                    calcMoney(current) {
+                      return current
+                    },
+
+                    calcTime() {
+                      return 0
+                    },
+
+                    calcEnviroImpact(current) {
+                      return current
+                    },
+                    title: 'never',
+                    value: 0
+                  },
+                  {
+                    title: 'occasionally',
+                    value: 0.25
+                  },
+                  {
+                    title: 'sometimes',
+                    value: 0.5
+                  },
+                  {
+                    title: 'lots',
+                    value: 1
+                  }
+                ],
+                current: 0
+              },
+              {
+                title: 'Public Transport',
+                options: [{
+                    calcMoney(current) {
+                      return current
+                    },
+
+                    calcTime() {
+                      return 0
+                    },
+
+                    calcEnviroImpact(current) {
+                      return current
+                    },
+                    title: 'never',
+                    value: 0
+                  },
+                  {
+                    title: 'occasionally',
+                    value: 0.25
+                  },
+                  {
+                    title: 'sometimes',
+                    value: 0.5
+                  },
+                  {
+                    title: 'lots',
+                    value: 1
+                  }
+                ],
+                current: 0
+              },
+              {
+                title: 'Private',
+                options: [{
+                    calcMoney(current) {
+                      return current
+                    },
+
+                    calcTime() {
+                      return 0
+                    },
+
+                    calcEnviroImpact(current) {
+                      return current
+                    },
+                    title: 'never',
+                    value: 0
+                  },
+                  {
+                    title: 'occasionally',
+                    value: 0.25
+                  },
+                  {
+                    title: 'sometimes',
+                    value: 0.5
+                  },
+                  {
+                    title: 'lots',
+                    value: 1
+                  }
+                ],
+                current: 0
+              }
+            ]
+
+          }
+        ]
+			}]
