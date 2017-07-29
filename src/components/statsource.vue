@@ -6,6 +6,11 @@
 
 <script>
 export default {
+  methods:{
+    closePopup(){
+      this.$store.commit('setCurrentPopUp', null)
+    }
+  }
 
 }
 </script>
