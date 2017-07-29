@@ -9,11 +9,15 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    groups: GROUPS 
+    groups: GROUPS,
+    currentPopup: null
   },
   mutations: {
-  setCurrentOption(state,{option,group, item}) {
-      item.current  = option.value
+    setCurrentOption(state, { option, group, item }) {
+      item.current = option.value
+    },
+    setCurrentPopUp(state,  popupName ) {
+      state.currentPopup = popupName
     }
   }
 })

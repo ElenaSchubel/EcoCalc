@@ -16,8 +16,8 @@
   </div>
 
   <div class="actions">
-    <button class="action">What does this mean?</button>
-    <button class="action">Where are the stats from?</button>
+    <button class="action" @click='showPopup("meaning")'>What does this mean?</button>
+    <button class="action" @click='showPopup("source")'>Where are the stats from?</button>
   </div>
 </div>
 </template>
@@ -25,6 +25,11 @@
 <script>
 export default {
   name: 'stats',
+  methods:{
+    showPopup(name){
+      this.$store.commit('setCurrentPopUp', name)
+    }
+  },
   computed: {
     money() {
       return this.$store.state.groups.reduce((total, group) => {
