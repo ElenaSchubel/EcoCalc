@@ -1,10 +1,9 @@
 <template>
-<div class="app">
+<div class="app fill">
   <group-view/>
-    <stat-source v-show='currentPopup === "source"'/>
-    <what-does-it-mean v-show='currentPopup === "meaning"'/>
-    <stats v-show='!currentPopup'/>
+    <map-view/>
 </div>
+
 </template>
 
 <script>
@@ -12,6 +11,7 @@ import GroupView from './components/group-view'
 import Stats from './components/stats'
 import StatSource from './components/statsource'
 import WhatDoesItMean from './components/whatdoesitmean'
+import MapView from './components/map'
 export default {
   name: 'app',
 
@@ -24,7 +24,8 @@ export default {
     GroupView,
     Stats,
     WhatDoesItMean,
-    StatSource
+    StatSource,
+    MapView
   }
 }
 </script>
@@ -33,5 +34,6 @@ export default {
 .app {
   display: flex;
   height: 100%;
+  z-index: 10000;
 }
 </style>
