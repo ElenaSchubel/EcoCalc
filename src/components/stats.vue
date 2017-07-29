@@ -19,7 +19,8 @@
     </div>
     <div class="stat">
       <img src="../assets/grass.png" />
-      <span :class="statClass(enviroImpact)">{{ formatPoints(enviroImpact) }}</span>
+      <span class="small" :class="statClass(waste)">{{ formatPoints(waste) }}kg waste</span>
+      <span class="small" :class="statClass(co2)">{{ formatPoints(co2) }}kg CO<sub>2</sub></span>
     </div>
   </div>
 
@@ -31,6 +32,7 @@
 
 <script>
 import { hasStats } from "../stats-helper"
+import { formatCurrency, formatTime, formatPoints } from "../format-helper"
 
 export default {
   name: 'stats',
@@ -50,72 +52,82 @@ export default {
       }
       return ""
     },
-    formatCurrency(money) {
-      if (money >= 0) {
-        return "$" + money.toFixed(2)
-      } else {
-        return "-$" + Math.abs(money).toFixed(2)
-      }
-    },
-    formatTime(time) {
-      return "" + time.toFixed(2) + " hr"
-    },
-    formatPoints(points) {
-      if (points > 0) {
-        return "+" + points
-      } else {
-        return points.toString()
-      }
-    }
+    formatCurrency,
+    formatTime,
+    formatPoints
   },
   computed: {
     money() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
           return itemsTotal + (item.baseline !== null ? item.calcMoney(item.baseline) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
       const current = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
           return itemsTotal + (item.baseline !== null ? item.calcMoney(item.current) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
       return baseline - current
     },
     time() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
           return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.baseline) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
       const current = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
           return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.current) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
       const seconds = baseline - current
 
       return seconds / 3600
     },
 
-    enviroImpact() {
+    waste() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcEnviroImpact(item.baseline) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.baseline) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
       const current = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcEnviroImpact(item.current) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.current) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
       return baseline - current
+    },
+
+    co2() {
+      const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcCo2(item.baseline) : 0)
+        }, 0)
+      }, 0) * 52
+
+      const current = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcCo2(item.current) : 0)
+        }, 0)
+      }, 0) * 52
+
+      return (baseline - current) / 1000
     }
   }
 
@@ -251,6 +263,10 @@ export default {
 
 .stat > span {
   font-size: 2.25rem;
+}
+
+.stat > span.small {
+  font-size: 1.2rem;
 }
 
 .stat .positive {

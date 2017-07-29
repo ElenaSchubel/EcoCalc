@@ -2,17 +2,42 @@
 <div class="whatdoesitmean">
   <button class='close' @click='closePopup'>&times;</button>
   <h2 class="title">Here's how we worked everything out.</h2>
+
+  <h3>Money</h3>
+  <table>
+    <tr v-for="calc in moneyCalculations" :key="calc[0]">
+      <th>{{ calc[0] }}</th>
+      <td>{{ formatCurrency(calc[1]) }} {{ calc[2] }}</td>
+      <td>×</td>
+      <td>{{ formatCurrency(calc[3]) }}</td>
+      <td>=</td>
+      <td>{{ formatCurrency(calc[1] * calc[3]) }} per week</td>
+    </tr>
+  </table>
 </div>
 </template>
 
 <script>
+import { formatCurrency, formatTime, formatPoints } from "../format-helper"
+
 export default {
+  computed: {
+    moneyCalculations() {
+      return this.$store.state.groups.reduce((calculations, group) => {
+        let relevantItems = group.items.filter(item => item.value !== null && item.value !== 0 && item.moneyMultiplier > 0)
+        relevantItems.forEach(item => calculations.push([item.title, item.moneyMultiplier, item.moneyMultiplierDesc, item.value]))
+        return calculations
+      }, [])
+    }
+  },
   methods:{
     closePopup(){
       this.$store.commit('setCurrentPopUp', null)
-    }
+    },
+    formatCurrency,
+    formatTime,
+    formatPoints
   }
-
 }
 </script>
 
