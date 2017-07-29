@@ -187,42 +187,9 @@ export default [{
 
   },
 
-      {
-        title: 'Transport',
-
-        items: [{
-            title: 'walking and biking',
-
-            calcTime() {
-              return 0
-            },
-
-            calcEnviroImpact(current) {
-              return current
-            },
-
-            options: [{
-                title: 'never',
-                value: 0
-              },
-              {
-                title: 'occasionally',
-                value: 0.25
-              },
-              {
-                title: 'sometimes',
-                value: 0.5
-              },
-              {
-                title: 'lots',
-                value: 1
-              }
-            ],
-            current: 0
-          },
 
           {
-            title: 'Transport',
+
 
             items: [{
                 title: 'walking and biking',
@@ -321,7 +288,4 @@ export default [{
                 current: 0
               }
             ]
-
-          }
-        ]
 			}]
