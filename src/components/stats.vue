@@ -189,11 +189,11 @@ export default {
   position: absolute;
   bottom: 0;
   left: 0;
-  margin-left: -25px;
-  margin-bottom: -12px;
-  height: 50px;
-  width: 50px;
-  background-image: url(../assets/you.png);
+  margin-left: -12px;
+  margin-bottom: 10px;
+  height: 25px;
+  width: 25px;
+  background-image: url(../assets/star.png);
   background-position: center;
   background-size: cover;
 }
