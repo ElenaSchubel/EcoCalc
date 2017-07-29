@@ -1,6 +1,6 @@
 <template>
   <div class="controls">
-    <p>Let's check my ...</p>
+    <p>Let's nut out ...</p>
 
     <div v-for='group in groups' :key="group.title" class="group" :class="{ active: allBaselines(group) }">
       <h2 class="group-title">
