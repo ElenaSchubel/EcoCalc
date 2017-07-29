@@ -1,7 +1,6 @@
 <template>
 <div class="app">
   <group-view/>
-    <stat-source v-show='currentPopup === "source"'/>
     <what-does-it-mean v-show='currentPopup === "meaning"'/>
     <stats v-show='!currentPopup'/>
 </div>
@@ -10,7 +9,6 @@
 <script>
 import GroupView from './components/group-view'
 import Stats from './components/stats'
-import StatSource from './components/statsource'
 import WhatDoesItMean from './components/whatdoesitmean'
 export default {
   name: 'app',
@@ -23,8 +21,7 @@ export default {
   components: {
     GroupView,
     Stats,
-    WhatDoesItMean,
-    StatSource
+    WhatDoesItMean
   }
 }
 </script>
