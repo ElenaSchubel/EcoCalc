@@ -11,7 +11,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     groups: GROUPS,
-    currentPopup: null
+    currentPopup: null,
+    statsMinimised: false
   },
   mutations: {
     setCurrentOption(state, { option, group, item }) {
@@ -26,6 +27,16 @@ const store = new Vuex.Store({
     toggleGroup(state, groupTitle) {
       const group = find(state.groups, group => group.title === groupTitle)
       group.expanded = !group.expanded
+    },
+    resetGroup(state, groupTitle) {
+      const group = find(state.groups, group => group.title === groupTitle)
+      group.items.forEach(item => {
+        item.current = null
+        item.baseline = null
+      })
+    },
+    toggleStatsMinimised(state) {
+      state.statsMinimised = !state.statsMinimised
     }
   }
 })

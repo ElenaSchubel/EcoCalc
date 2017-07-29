@@ -7,6 +7,11 @@
         <button @click="toggleGroup(group.title)">{{group.title}}</button>
       </h2>
       <div class="items" v-show="group.expanded">
+        <p class="explanation" v-if="allBaselines(group)">
+          The yellow markers show where you're at right now. See what you could get with lower or higher amounts!
+          <button class="reset" @click="resetGroup(group)">Start again</button>
+        </p>
+
         <div class="item" v-for='item in group.items' :key="item.title">
           <h3 class="item-title" v-if="!allBaselines(group)">{{item.questionPrefix}}<strong>{{item.title}}</strong>{{item.questionSuffix}}</h3>
           <h3 class="item-title" v-if="allBaselines(group)">{{item.whatIfPrefix}}<strong>{{item.title}}</strong>{{item.whatIfSuffix}}</h3>
@@ -27,7 +32,7 @@
 </template>
 
 <script>
-import every from "lodash/every";
+import { allBaselines } from "../stats-helper"
 
 export default {
   name: 'group-view',
@@ -37,14 +42,15 @@ export default {
     }
   },
   methods: {
-    allBaselines(group) {
-      return every(group.items, item => item.baseline !== null)
-    },
+    allBaselines,
     setCurrentOption(option, item, group) {
       this.$store.commit('setCurrentOption', { option, item, group })
     },
     toggleGroup(title) {
       this.$store.commit("toggleGroup", title)
+    },
+    resetGroup(group) {
+      this.$store.commit("resetGroup", group.title)
     }
   }
 }
@@ -98,6 +104,19 @@ export default {
 .items {
   padding: 15px;
   padding-top: 5px;
+}
+
+.explanation {
+  color: #777;
+  margin: 5px 0 0 0;
+}
+
+.reset {
+  border: none;
+  background: transparent;
+  color: #0277BD;
+  padding: 0;
+  text-decoration: underline;
 }
 
 .item-title {
