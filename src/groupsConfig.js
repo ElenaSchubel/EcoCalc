@@ -1,5 +1,6 @@
 export default [{
     title: 'waste',
+    expanded: false,
     items: [{
       calcMoney(current) {
         return current * 2.50
@@ -45,6 +46,7 @@ export default [{
   },
   {
     title: 'heating',
+    expanded: false,
 
     items: [{
         title: 'heat pump',
@@ -189,6 +191,7 @@ export default [{
 
   {
     title: 'Transport',
+    expanded: false,
 
     items: [{
 			title: 'walking and biking',
