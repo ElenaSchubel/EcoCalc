@@ -45,7 +45,7 @@ export default {
       }
     },
     formatTime(time) {
-      return "" + Math.round(time) + " min"
+      return "" + time.toFixed(2) + " hr"
     },
     formatPoints(points) {
       if (points > 0) {
@@ -74,17 +74,19 @@ export default {
     time() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcTime(item.baseline) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.baseline) : 0)
         }, 0)
       }, 0)
 
       const current = this.$store.state.groups.reduce((total, group) => {
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcTime(item.current) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.current) : 0)
         }, 0)
       }, 0)
 
-      return baseline - current
+      const seconds = baseline - current
+
+      return seconds / 3600
     },
 
     enviroImpact() {
