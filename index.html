@@ -2,8 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <title>eco-calc</title>
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,700,700i" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="http://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-pano.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="https://js.cit.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    
     <style>
       body {
         font-family: "Rubik", sans-serif;
@@ -24,9 +32,133 @@
         cursor: pointer;
       }
     </style>
+
+    
   </head>
   <body>
     <div id="app"></div>
+    <div style="width: 800px; height: 580px" id="mapContainer"></div>
+
+    <!-- <p><button onclick="geoFindMe()">Show my location</button></p> -->
+    <div id="out"></div>
     <!-- built files will be auto injected -->
   </body>
+
+  <script type="text/javascript">
+
+    
+
+    function addMarkersToMap(map, lat, lng) {
+
+      // Create a marker icon from an image URL:
+      var youAreHereIcon = new H.map.Icon('static/you_are_here.png');
+      var userLocationMarker = new H.map.Marker({lat: lat, lng: lng}, { icon: youAreHereIcon });
+      map.addObject(userLocationMarker);
+
+      var landfillIcon = new H.map.Icon('static/landfill.png');
+      var landfillMarker = new H.map.Marker({lng: 174.745253, lat: -41.325648}, { icon: landfillIcon });
+      map.addObject(landfillMarker);
+    }
+
+  function restrictMap(map){ 
+  var bounds = new H.geo.Rect(-41.200035, 174.586065, -41.359314, 174.889477 );
+
+  map.getViewModel().addEventListener('sync', function() {
+    var center = map.getCenter();
+
+    if (!bounds.containsPoint(center)) {
+      if (center.lat > bounds.getTop()) {
+        center.lat = bounds.getTop();
+      } else if (center.lat < bounds.getBottom()) {
+        center.lat = bounds.getBottom();
+      }
+      if (center.lng < bounds.getLeft()) {
+        center.lng = bounds.getLeft();
+      } else if (center.lng > bounds.getRight()) {
+        center.lng = bounds.getRight();
+      }
+      map.setCenter(center);
+    }
+  });
+
+  //Debug code to visualize where your restriction is
+  map.addObject(new H.map.Rect(bounds, {
+    style: {
+        fillColor: 'rgba(0, 0, 0, 0)',
+        //strokeColor: 'rgba(55, 85, 170, 0.6)',
+        lineWidth: 1
+      }
+    }
+  ));
+  }
+
+
+
+
+        // Initialize the platform object:
+    var platform = new H.service.Platform({
+    'app_id': 'Q5zvRu68GDywWia3ODjt',
+    'app_code': '2fPM7v20izgMJt5hVpEmWQ',
+     useCIT: true,
+      useHTTPS: true
+    });
+
+    // Obtain the default map types from the platform object
+    var defaultLayers = platform.createDefaultLayers();
+
+    // Instantiate (and display) a map object:
+    var map = new H.Map(
+    document.getElementById('mapContainer'),
+    defaultLayers.normal.map,
+    {
+      zoom: 12,
+      center: { lng: 174.7642679, lat: -41.2923359}
+    });
+    // var maxZoom = 5 
+    //map.setMaxZoom(10);
+    // Create the default UI:
+  var ui = H.ui.UI.createDefault(map, defaultLayers, 'en-US');
+
+  // MapEvents enables the event system
+// Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+  var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+  restrictMap(map);
+
+  function geoFindMe() {
+  var output = document.getElementById("out");
+
+  if (!navigator.geolocation){
+    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    return;
+  }
+
+  function success(position) {
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+
+    // var img = new Image();
+    // img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
+
+    // output.appendChild(img);
+
+    addMarkersToMap(map, latitude, longitude);
+  }
+
+
+
+  function error() {
+    output.innerHTML = "Unable to retrieve your location";
+  }
+
+  output.innerHTML = "<p>Locating…</p>";
+
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+  geoFindMe();
+
+  </script>
 </html>
