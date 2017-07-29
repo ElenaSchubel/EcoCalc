@@ -1,13 +1,25 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
-  </div>
+<div id="app">
+  <img src="./assets/logo.png">
+  <router-view></router-view>
+  <button v-on:click="increment">I am the All Mighty Button</button>
+  <span> {{count}}</span>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  methods: {
+    increment() {
+      this.$store.commit('increment')
+    }
+  },
+  computed: {
+    count() {
+      return this.$store.state.count
+    }
+  }
 }
 </script>
 
