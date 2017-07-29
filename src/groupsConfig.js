@@ -10,7 +10,7 @@ export default [{
         whatIfSuffix: " per week ...",
 
         calcMoney(current) {
-          return current * 3
+          return current * 2.50
         },
 
         calcTimeSeconds(current) {
@@ -360,24 +360,24 @@ export default [{
             value: 0
           },
           {
-            title: '1',
-            value: 1
-          },
-          {
             title: '2',
             value: 2
-          },
-          {
-            title: '3',
-            value: 3
           },
           {
             title: '4',
             value: 4
           },
           {
-            title: '5+',
-            value: 5
+            title: '6',
+            value: 6
+          },
+          {
+            title: '8',
+            value: 8
+          },
+          {
+            title: '10+',
+            value: 10
           }
         ],
         current: null,
@@ -410,24 +410,24 @@ export default [{
             value: 0
           },
           {
-            title: '1',
-            value: 1
-          },
-          {
             title: '2',
             value: 2
-          },
-          {
-            title: '3',
-            value: 3
           },
           {
             title: '4',
             value: 4
           },
           {
-            title: '5+',
-            value: 5
+            title: '6',
+            value: 6
+          },
+          {
+            title: '8',
+            value: 8
+          },
+          {
+            title: '10+',
+            value: 10
           }
         ],
         current: null,
@@ -461,24 +461,24 @@ export default [{
             value: 0
           },
           {
-            title: '1',
-            value: 1
-          },
-          {
             title: '2',
             value: 2
-          },
-          {
-            title: '3',
-            value: 3
           },
           {
             title: '4',
             value: 4
           },
           {
-            title: '5+',
-            value: 5
+            title: '6',
+            value: 6
+          },
+          {
+            title: '8',
+            value: 8
+          },
+          {
+            title: '10+',
+            value: 10
           }
         ],
         current: null,
@@ -511,24 +511,24 @@ export default [{
             value: 0
           },
           {
-            title: '1',
-            value: 1
-          },
-          {
             title: '2',
             value: 2
-          },
-          {
-            title: '3',
-            value: 3
           },
           {
             title: '4',
             value: 4
           },
           {
-            title: '5+',
-            value: 5
+            title: '6',
+            value: 6
+          },
+          {
+            title: '8',
+            value: 8
+          },
+          {
+            title: '10+',
+            value: 10
           }
         ],
         current: null,
