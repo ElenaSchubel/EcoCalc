@@ -1,7 +1,10 @@
-export default [
+export default
+[
 	{
       title: 'waste',
       items: [{
+      	title: 'rubbish bags',
+
       	calcMoney(current) {
       		return current * 2.50
       	},
@@ -15,7 +18,7 @@ export default [
       	},
       	
 
-        title: 'rubbish bags',
+        
         options: [{
             title: '0',
             value: 0
@@ -63,7 +66,8 @@ export default [
       		return current
       	},
       	
-        options: [{
+        options: 
+        [{
             title: 'never',
             value: 0
           },
@@ -81,16 +85,8 @@ export default [
           }
         ],
         current: 0
-      }],
-
-       
-
-
-
-    },
-
-    {
-    	items: [{
+      },
+      {
       	title: 'blankets',
 
       	calcMoney(current) {
@@ -123,11 +119,9 @@ export default [
           }
         ],
         current: 0
-      }]
-    },
+      },
 
-    {
-    	items: [{
+      {
       	title: 'wood',
 
       	calcMoney(current) {
@@ -160,11 +154,8 @@ export default [
           }
         ],
         current: 0
-      }]
-    },
-
-    {
-    	items: [{
+      },
+      {
       	title: 'bar heater',
 
       	calcMoney(current) {
@@ -198,7 +189,48 @@ export default [
         ],
         current: 0
       }]
-    }
 
+    },
+
+
+    {
+      title: 'transport',
+
+      items: [{
+      	title: 'walking',
+
+      	calcMoney(current) {
+      		return current * 7
+      	},
+
+      	calcTime() {
+      		return 0
+      	},
+
+      	calcEnviroImpact(current){
+      		return current
+      	},
+      	
+        options: [{
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      }],
+
+    }
 
 ]
