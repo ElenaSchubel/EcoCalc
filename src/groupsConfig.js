@@ -9,6 +9,9 @@ export default [{
         whatIfPrefix: "What if you used a different number of ",
         whatIfSuffix: " per week ...",
 
+        moneyMultiplier: 2.5,
+        moneyMultiplierDesc: " per council rubbish bag",
+
         calcMoney(current) {
           return current * 2.50
         },
@@ -17,8 +20,12 @@ export default [{
           return current * 300
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          return current * 6.25
+        },
+
+        calcCo2(current) {
+          return 0
         },
 
         options: [{
@@ -64,8 +71,13 @@ export default [{
           return current * 300
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          // return current * 5
+          return 0
+        },
+
+        calcCo2(current) {
+          return 0
         },
 
         options: [{
@@ -97,11 +109,11 @@ export default [{
         baseline: null
       },
       {
-        title: '% soft plastic',
-        questionPrefix: "How many ",
-        questionSuffix: " do you fill per week?",
-        whatIfPrefix: "What if you used a different number of ",
-        whatIfSuffix: " per week ...",
+        title: 'soft plastic',
+        questionPrefix: "How much of your ",
+        questionSuffix: " do you recycle?",
+        whatIfPrefix: "What if you recycled a different amount of ",
+        whatIfSuffix: "?",
 
         calcMoney() {
           return 0
@@ -111,8 +123,13 @@ export default [{
           return current * 3
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          // return current * 0.18 / 100
+          return 0
+        },
+
+        calcCo2(current) {
+          return 0
         },
 
         options: [{
@@ -154,8 +171,13 @@ export default [{
           return current * 3
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          // return current * 0.66 / 100
+          return 0
+        },
+
+        calcCo2(current) {
+          return 0
         },
 
         options: [{
@@ -206,8 +228,8 @@ export default [{
         return 0
       },
 
-			calcEnviroImpact(current) {
-				return current
+			calcWasteKg() {
+        return 0
       },
 
 			options: [
@@ -241,19 +263,19 @@ export default [{
         questionSuffix: " trips per day?",
 
 				calcMoney(trips) {
-					return trips * 5
+					return trips * 5 * 7
 				},
 
 				calcTimeSeconds(trips) {
-					return 80 * 20 * trips
+					return 80 * 10 * trips * 7
         },
 
         calcCo2(trips) {
-          return 18.1 * 20 * trips
+          return 18.1 * 10 * trips * 7
         },
 
-				calcEnviroImpact(current) {
-					return current
+				calcWasteKg(current) {
+          return 0
         },
 
         options: [{
@@ -289,20 +311,21 @@ export default [{
         questionPrefix: "How far do you go by ",
         questionSuffix: "?",
 				calcMoney(km) {
-					return km * 0.73
+					return km * 0.3 * 7
 				},
 
 				calcTimeSeconds(km) {
-					return km * 72
+					return km * 72 * 7
         },
 
         calcCo2(km) {
-          198.71 * km
+          return 198.71 * km * 7
         },
 
-				calcEnviroImpact(current) {
-					return current
-				},
+				calcWasteKg(current) {
+          return 0
+        },
+
         options: [{
             title: 'nowhere',
             value: 0
@@ -339,7 +362,7 @@ export default [{
         questionSuffix: " per day?",
 
         calcMoney(hours) {
-          return hours * 0.27
+          return hours * 0.27 * 7
         },
 
         calcTimeSeconds() {
@@ -347,11 +370,11 @@ export default [{
         },
 
         calcCo2(hours) {
-          return 141.55 * hours
+          return 141.55 * hours * 7
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          return 0
         },
 
         options: [
@@ -389,7 +412,7 @@ export default [{
         questionSuffix: "?",
 
         calcMoney(hours) {
-          return hours * 0.6
+          return hours * 0.6 * 7
         },
 
         calcTimeSeconds() {
@@ -397,11 +420,11 @@ export default [{
         },
 
         calcCo2(hours) {
-          return 314.56 * hours
+          return 314.56 * hours * 7
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          return 0
         },
 
         options: [
@@ -440,7 +463,7 @@ export default [{
         questionSuffix: "?",
 
         calcMoney(hours) {
-          return hours * 0.28
+          return hours * 0.28 * 7
         },
 
         calcTimeSeconds() {
@@ -448,11 +471,11 @@ export default [{
         },
 
         calcCo2(hours) {
-          return 200 * hours
+          return 200 * hours * 7
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          return 0
         },
 
         options: [
@@ -501,8 +524,8 @@ export default [{
           return 0
         },
 
-        calcEnviroImpact(current) {
-          return current
+        calcWasteKg(current) {
+          return 0
         },
 
         options: [
