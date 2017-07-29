@@ -26,7 +26,7 @@
 export default {
   name: 'stats',
   methods: {
-    showPopup(name){
+    showPopup(name) {
       this.$store.commit('setCurrentPopUp', name)
     },
     statClass(stat) {
@@ -112,17 +112,41 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .stats-wrapper {
-  position: absolute;
   width: 450px;
   height: 230px;
-  left: 50%;
-  top: 50%;
-  margin-top: -180px;
+  margin-top: -270px;
   margin-left: -225px;
   background-color: #444;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+}
+
+.stats-wrapper:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -27px;
+  margin-bottom: 26px;
+  border-top: 7px solid #444;
+  border-bottom: 7px solid transparent;
+  border-left: 9px solid transparent;
+  border-right: 9px solid #444;
+}
+
+.stats-wrapper:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: -25px;
+  margin-bottom: -12px;
+  height: 50px;
+  width: 50px;
+  background-image: url(../assets/you.png);
+  background-position: center;
+  background-size: cover;
 }
 
 .stats {

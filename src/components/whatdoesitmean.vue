@@ -17,14 +17,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.whatdoesitmean{
-  flex: auto;
+.whatdoesitmean {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
   background-color: rgb(66, 204, 184);
   margin: 20px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-
 }
 
 .close {
