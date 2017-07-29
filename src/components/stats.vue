@@ -3,21 +3,21 @@
   <div class="stats">
     <div class="stat">
       <img src="../assets/coins.png" />
-      <span :class="money > 0 ? 'positive' : 'negative'">{{ money }}</span>
+      <span :class="statClass(money)">{{ formatCurrency(money) }}</span>
     </div>
     <div class="stat">
       <img src="../assets/timer.png" />
-      <span :class="time > 0 ? 'positive' : 'negative'">{{ time }}</span>
+      <span :class="statClass(time)">{{ formatTime(time) }}</span>
     </div>
     <div class="stat">
       <img src="../assets/grass.png" />
-      <span :class="enviroImpact > 0 ? 'positive' : 'negative'">{{ enviroImpact }}</span>
+      <span :class="statClass(enviroImpact)">{{ formatPoints(enviroImpact) }}</span>
     </div>
   </div>
 
   <div class="actions">
-    <button class="action">What does this mean?</button>
-    <button class="action">Where are the stats from?</button>
+    <button class="action" @click='showPopup("meaning")'>What does this mean?</button>
+    <button class="action" @click='showPopup("source")'>Where are the stats from?</button>
   </div>
 </div>
 </template>
@@ -25,6 +25,36 @@
 <script>
 export default {
   name: 'stats',
+  methods: {
+    showPopup(name){
+      this.$store.commit('setCurrentPopUp', name)
+    },
+    statClass(stat) {
+      if (stat > 0) {
+        return "positive"
+      } else if (stat < 0) {
+        return "negative"
+      }
+      return ""
+    },
+    formatCurrency(money) {
+      if (money >= 0) {
+        return "$" + money.toFixed(2)
+      } else {
+        return "-$" + Math.abs(money).toFixed(2)
+      }
+    },
+    formatTime(time) {
+      return "" + Math.round(time) + " min"
+    },
+    formatPoints(points) {
+      if (points > 0) {
+        return "+" + points
+      } else {
+        return points.toString()
+      }
+    }
+  },
   computed: {
     money() {
       return this.$store.state.groups.reduce((total, group) => {
@@ -80,12 +110,12 @@ export default {
   color: #ddd;
 }
 
-.stat.positive {
-  color: #8BC34A;
+.stat:first-child {
+  margin-right: 30px;
 }
 
-.stat.negative {
-  color: #DD2C00;
+.stat:last-child {
+  margin-left: 30px;
 }
 
 .stat > img {
@@ -94,7 +124,15 @@ export default {
 }
 
 .stat > span {
-  font-size: 3rem;
+  font-size: 2.5rem;
+}
+
+.stat .positive {
+  color: #8BC34A;
+}
+
+.stat .negative {
+  color: #DD2C00;
 }
 
 .actions {
