@@ -8,7 +8,7 @@
       </h2>
       <div class="items" v-show="group.expanded">
         <div class="item" v-for='item in group.items' :key="item.title">
-          <h3 class="item-title">{{item.title}}</h3>
+          <h3 class="item-title">{{item.questionPrefix}}<strong>{{item.title}}</strong>{{item.questionSuffix}}</h3>
           <div class="options">
             <button
                 v-for='option in item.options'

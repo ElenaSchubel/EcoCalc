@@ -16,6 +16,9 @@ export default [{
 
 
       title: 'rubbish bags',
+      questionPrefix: "How many ",
+      questionSuffix: " do you fill per week?",
+
       options: [{
           title: '0',
           value: 0
@@ -41,7 +44,8 @@ export default [{
           value: 5
         },
       ],
-      current: 0
+      current: 0,
+      baseline: null
     }]
   },
   {
@@ -50,6 +54,8 @@ export default [{
 
     items: [{
         title: 'heat pump',
+        questionPrefix: "How much do you use a ",
+        questionSuffix: "?",
 
         calcMoney(current) {
           return current * 7
@@ -80,10 +86,13 @@ export default [{
             value: 1
           }
         ],
-        current: 0
+        current: 0,
+        baseline: null
       },
       {
         title: 'blankets',
+        questionPrefix: "How about ",
+        questionSuffix: "?",
 
         calcMoney(current) {
           return current * 7
@@ -114,11 +123,14 @@ export default [{
             value: 1
           }
         ],
-        current: 0
+        current: 0,
+        baseline: null
       },
 
       {
-        title: 'wood',
+        title: 'wood fire',
+        questionPrefix: "How about a ",
+        questionSuffix: "?",
 
         calcMoney(current) {
           return current * 7
@@ -149,10 +161,13 @@ export default [{
             value: 1
           }
         ],
-        current: 0
+        current: 0,
+        baseline: null
       },
       {
         title: 'bar heater',
+        questionPrefix: "How about a ",
+        questionSuffix: "?",
 
         calcMoney(current) {
           return current * 7
@@ -183,7 +198,8 @@ export default [{
             value: 1
           }
         ],
-        current: 0
+        current: 0,
+        baseline: null
       }
     ]
 
@@ -194,7 +210,10 @@ export default [{
     expanded: false,
 
     items: [{
-			title: 'walking and biking',
+      title: 'walking or biking',
+      questionPrefix: "How often do you get to work by ",
+      questionSuffix: "?",
+
 			calcMoney(current) {
 				return current
 			},
@@ -223,10 +242,13 @@ export default [{
             value: 1
           }
         ],
-        current: 0
+        current: 0,
+        baseline: null
       },
       {
-        title: 'Public Transport',
+        title: 'public transport',
+        questionPrefix: "How about using ",
+        questionSuffix: "?",
 				calcMoney(current) {
 					return current
 				},
@@ -255,10 +277,13 @@ export default [{
             value: 1
           }
         ],
-        current: 0
+        current: 0,
+        baseline: null
       },
       {
-        title: 'Private',
+        title: 'car',
+        questionPrefix: "How about by ",
+        questionSuffix: "?",
 				calcMoney(current) {
 					return current
 				},
@@ -287,7 +312,8 @@ export default [{
             value: 1
           }
         ],
-        current: 0
+        current: 0,
+        baseline: null
       }
     ]
 
