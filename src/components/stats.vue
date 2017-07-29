@@ -111,8 +111,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .stats-wrapper {
-  align-self: center;
-  margin: 0 auto;
+  position: absolute;
+  width: 450px;
+  height: 230px;
+  left: 50%;
+  top: 50%;
+  margin-top: -180px;
+  margin-left: -225px;
   background-color: #444;
   border-radius: 5px;
   display: flex;
