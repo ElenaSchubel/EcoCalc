@@ -196,8 +196,9 @@ export default
     {
       title: 'transport',
 
-      items: [{
-      	title: 'walking',
+      items: [
+      {
+      	title: 'walking and biking',
 
       	calcMoney(current) {
       		return current * 7
@@ -211,7 +212,9 @@ export default
       		return current
       	},
       	
-        options: [{
+        options: 
+        [
+          {
             title: 'never',
             value: 0
           },
@@ -229,7 +232,83 @@ export default
           }
         ],
         current: 0
-      }],
+      },
+
+      {
+      	title: 'Private Transport',
+
+      	calcMoney(current) {
+      		return current * 7
+      	},
+
+      	calcTime() {
+      		return 0
+      	},
+
+      	calcEnviroImpact(current){
+      		return current
+      	},
+      	
+        options: 
+        [
+          {
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      },
+
+      {
+      	title: 'Public Transport',
+
+      	calcMoney(current) {
+      		return current * 7
+      	},
+
+      	calcTime() {
+      		return 0
+      	},
+
+      	calcEnviroImpact(current){
+      		return current
+      	},
+      	
+        options: 
+        [
+          {
+            title: 'never',
+            value: 0
+          },
+          {
+            title: 'occasionally',
+            value: 0.25
+          },
+          {
+            title: 'sometimes',
+            value: 0.5
+          },
+          {
+            title: 'lots',
+            value: 1
+          }
+        ],
+        current: 0
+      }
+
+      ]
 
     }
 
