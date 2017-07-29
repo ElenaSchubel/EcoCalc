@@ -15,6 +15,9 @@ const store = new Vuex.Store({
   },
   mutations: {
     setCurrentOption(state, { option, group, item }) {
+      if (item.baseline === null) {
+        item.baseline = option.value
+      }
       item.current = option.value
     },
     setCurrentPopUp(state,  popupName ) {

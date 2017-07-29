@@ -8,13 +8,14 @@
       </h2>
       <div class="items" v-show="group.expanded">
         <div class="item" v-for='item in group.items' :key="item.title">
-          <h3 class="item-title">{{item.questionPrefix}}<strong>{{item.title}}</strong>{{item.questionSuffix}}</h3>
+          <h3 class="item-title" v-if="!allBaselines(group)">{{item.questionPrefix}}<strong>{{item.title}}</strong>{{item.questionSuffix}}</h3>
+          <h3 class="item-title" v-if="allBaselines(group)">{{item.whatIfPrefix}}<strong>{{item.title}}</strong>{{item.whatIfSuffix}}</h3>
           <div class="options">
             <button
                 v-for='option in item.options'
                 :key="option.title"
                 class="option"
-                :class="{ active: option.value === item.current }"
+                :class="{ active: item.baseline !== null && option.value === item.current, baseline: option.value === item.baseline }"
                 @click='setCurrentOption(option, item, group) '>
               {{option.title}}
             </button>
@@ -26,6 +27,8 @@
 </template>
 
 <script>
+import every from "lodash/every";
+
 export default {
   name: 'group-view',
   computed: {
@@ -34,6 +37,9 @@ export default {
     }
   },
   methods: {
+    allBaselines(group) {
+      return every(group.items, item => item.baseline !== null)
+    },
     setCurrentOption(option, item, group) {
       this.$store.commit('setCurrentOption', { option, item, group })
     },
@@ -126,5 +132,9 @@ export default {
 
 .option.active {
   background-color: #004967;
+}
+
+.option.baseline {
+  border-color: orange;
 }
 </style>

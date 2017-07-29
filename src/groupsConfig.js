@@ -18,6 +18,8 @@ export default [{
       title: 'rubbish bags',
       questionPrefix: "How many ",
       questionSuffix: " do you fill per week?",
+      whatIfPrefix: "What if you used a different number of ",
+      whatIfSuffix: " per week ...",
 
       options: [{
           title: '0',
