@@ -135,10 +135,12 @@ export default class MapController {
   addmarker(icon,location,description){
     var node = document.createElement('div')
     node.classList.add('map-marker')
+    node.setAttribute("data-tooltip", description)
     node.innerHTML=`<img src='${icon}'/>`
     var icon = new H.map.DomIcon(node)
     return new H.map.DomMarker(location, { icon })
   }
+
   restrictMap() {
     var bounds = new H.geo.Rect(-41.200035, 174.586065, -41.369314, 174.889477 );
 
