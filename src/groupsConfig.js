@@ -231,6 +231,8 @@ export default [{
       title: 'walking or biking',
       questionPrefix: "How much ",
       questionSuffix: " do you do per day?",
+      whatIfPrefix: "What if did more or less ",
+      whatIfSuffix: "?",
 
 			calcMoney() {
 				return 0
@@ -277,6 +279,8 @@ export default [{
         title: 'bus or train',
         questionPrefix: "How many ",
         questionSuffix: " trips per day?",
+        whatIfPrefix: "What if you made a different number of ",
+        whatIfSuffix: " bus or train trips per day?",
 
         moneyMultiplier: 5,
         moneyMultiplierDesc: " average cost per trip (3 zones)",
@@ -330,7 +334,9 @@ export default [{
       {
         title: 'car',
         questionPrefix: "How far do you go by ",
-        questionSuffix: "?",
+        questionSuffix: " per day?",
+        whatIfPrefix: "What if you went a different distance by ",
+        whatIfSuffix: " each day?",
 
         moneyMultiplier: 0.73,
         moneyMultiplierDesc: " overall cost per km (IRD mileage)",
@@ -394,6 +400,8 @@ export default [{
         title: 'heat pump',
         questionPrefix: "How many hours do you use a ",
         questionSuffix: " per day?",
+        whatIfPrefix: "What if you used a heat pump for more or less hours ",
+        whatIfSuffix: " per day?",
 
         moneyMultiplier: 0.27,
         moneyMultiplierDesc: " average cost per hour",
@@ -447,8 +455,10 @@ export default [{
       },
       {
         title: 'bar heater',
-        questionPrefix: "How about ",
+        questionPrefix: "How about a ",
         questionSuffix: "?",
+        whatIfPrefix: "What if you used a ",
+        whatIfSuffix: " for more or less hours per day?",
 
         moneyMultiplier: 0.6,
         moneyMultiplierDesc: " average cost per hour",
@@ -505,6 +515,8 @@ export default [{
         title: 'wood fire',
         questionPrefix: "How about a ",
         questionSuffix: "?",
+        whatIfPrefix: "What if you used a wood fire for more or less hours ",
+        whatIfSuffix: " per day?",
 
         moneyMultiplier: 0.28,
         moneyMultiplierDesc: " average cost per hour",
@@ -560,6 +572,8 @@ export default [{
         title: 'blankets',
         questionPrefix: "How about ",
         questionSuffix: "?",
+        whatIfPrefix: "What if you just wrapped yourself in ",
+        whatIfSuffix: " for a different amount of time per day?",
 
         calcMoney() {
           return 0

@@ -25,7 +25,7 @@ export default class MapController {
     this.map = new H.Map(
       node,
       defaultLayers.normal.map,
-      { zoom: 12, center: this.location }
+      { zoom: 12, center: { lat: this.location.lat + 0.03, lng: this.location.lng } }
     )
     this.ui = H.ui.UI.createDefault(this.map, defaultLayers, 'en-US')
     this.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
@@ -71,59 +71,60 @@ export default class MapController {
   addMarkersToMap() {
     if (!this.markers) {
       this.markers = {}
-      this.markers.mtViictoria = this.addmarker('static/trekking3.png', {lng:174.7442 	, lat:-41.299 })
-      this.map.addObject(this.markers.mtViictoria)
+      // this.markers.mtViictoria = this.addmarker('static/trekking3.png', {lng:174.7442 	, lat:-41.299 })
+      // this.map.addObject(this.markers.mtViictoria)
 
-      this.markers.golfClubMarker = this.addmarker('static/trekking3.png', {lng:174.7442 	, lat:-41.299 })
-      this.map.addObject(this.markers.golfClubMarker)
+      // this.markers.golfClubMarker = this.addmarker('static/trekking3.png', {lng:174.7442 	, lat:-41.299 })
+      // this.map.addObject(this.markers.golfClubMarker)
 
-      this.markers.sanctuary = this.addmarker('static/sanctuary.png', {lng: 174.751167, lat: -41.2907781 })
-      this.map.addObject(this.markers.sanctuary)
+      // this.markers.sanctuary = this.addmarker('static/sanctuary.png', {lng: 174.751167, lat: -41.2907781 })
+      // this.map.addObject(this.markers.sanctuary)
 
-      this.markers.river = this.addmarker('static/river.png', {lng:174.7442 	, lat:-41.299 })
+      this.markers.river = this.addmarker('static/river.png', {lng:174.7442 	, lat:-41.299 }, "Fish die when waste pollutes the river. You'll end up spending more on that essential whitebait ...")
       this.map.addObject(this.markers.river)
 
-      this.markers.biking = this.addmarker('static/biking.png', {lng: 174.7200583, lat: -41.2969469 })
-      this.map.addObject(this.markers.biking)
+      // this.markers.biking = this.addmarker('static/biking.png', {lng: 174.7200583, lat: -41.2969469 })
+      // this.map.addObject(this.markers.biking)
 
-      this.markers.kiwi = this.addmarker('static/kiwi.png', {lng:174.7674514, lat: -41.2823079})
+      this.markers.kiwi = this.addmarker('static/kiwi.png', {lng: 174.784440, lat: -41.319527}, "New Zealand's wildlife can choke on plastic if it's left lying around.")
       this.map.addObject(this.markers.kiwi)
 
-      this.markers.botanical = this.addmarker('static/saving_rainforest.png', {lng:174.7442 	, lat:-41.299 })
+      this.markers.botanical = this.addmarker('static/rainforest.png', {lng:174.7412 	, lat:-41.309 }, "Trees soak up carbon dioxide, but not the amount we're currently producing.")
       this.map.addObject(this.markers.botanical)
 
-      this.markers.redRocks = this.addmarker('static/redRocks.png', {lng: 174.724319, lat: -41.357485})
-      this.map.addObject(this.markers.redRocks)
+      // this.markers.redRocks = this.addmarker('static/redRocks.png', {lng: 174.724319, lat: -41.357485})
+      // this.map.addObject(this.markers.redRocks)
 
-      this.markers.windMill2 = this.addmarker('static/windmill.png', {lng: 174.6473962, lat: -41.2680318})
-      this.map.addObject(this.markers.windMill2)
-
-      this.markers.windmill = this.addmarker('static/windmill.png', {lng: 174.755253, lat: -41.3144351 })
+      this.markers.windmill = this.addmarker('static/windmill.png', {lng: 174.6473962, lat: -41.2785918}, "Renewable energy sources will also help with reducing our emissions. We're already doing pretty well at this!")
       this.map.addObject(this.markers.windmill)
 
-      this.markers.river = this.addmarker('static/river.png', {lng:174.7442 	, lat:-41.299 })
-      this.map.addObject(this.markers.river)
+      // this.markers.windmill = this.addmarker('static/windmill.png', {lng: 174.755253, lat: -41.3144351 })
+      // this.map.addObject(this.markers.windmill)
 
-      this.markers.ticket = this.addmarker('static/ticket1.png', {lng:174.775384, lat:-41.293715})
+      // this.markers.river = this.addmarker('static/river.png', {lng:174.7442 	, lat:-41.299 })
+      // this.map.addObject(this.markers.river)
+
+      this.markers.ticket = this.addmarker('static/ticket1.png', {lng:174.775384, lat:-41.293715}, "Why not treat yourself with a few dollars of that money you just saved!")
       this.map.addObject(this.markers.ticket)
 
-      this.markers.landfill = this.addmarker('static/landfill.png', {lng: 174.745253, lat: -41.325648})
+      this.markers.landfill = this.addmarker('static/garbage-truck.png', {lng: 174.745253, lat: -41.325648}, "The Happy Valley landfill is filling up fast, and will soon eat into more of our beautiful scenery.")
       this.map.addObject(this.markers.landfill)
 
-      this.markers.marine = this.addmarker('static/dolphin.png', {lng:  174.774226, lat:-41.345420})
+      this.markers.marine = this.addmarker('static/dolphin.png', {lng:  174.774226, lat:-41.355420}, "Sea life can also die when it accidentally eats the plastic we throw away.")
       this.map.addObject(this.markers.marine)
 
-      this.markers.boat = this.addmarker('static/boat.png', {lng:174.782003 ,lat:-41.279916})
+      this.markers.boat = this.addmarker('static/boat.png', {lng:174.782003 ,lat:-41.279916}, "You could go on a awesome boat trip with the amount of money you've saved!")
       this.map.addObject(this.markers.boat)
     }
 
-    console.log(this.waste(), this.money())
-
     this.markers.river.setVisibility(this.waste() > 5)
     this.markers.ticket.setVisibility(this.money() > 10)
-    this.markers.landfill.setVisibility(this.waste() >= 0)
+    this.markers.landfill.setVisibility(this.waste() <= 0)
     this.markers.marine.setVisibility(this.waste() > 5)
     this.markers.boat.setVisibility(this.money() > 100)
+    this.markers.kiwi.setVisibility(this.waste() < 0)
+    this.markers.botanical.setVisibility(this.co2() > 0)
+    this.markers.windmill.setVisibility(this.co2() > 0)
   }
 
   addmarker(icon,location,description){
@@ -157,14 +158,14 @@ export default class MapController {
     });
 
     //Debug code to visualize where your restriction is
-    this.map.addObject(new H.map.Rect(bounds, {
-      style: {
-          fillColor: 'rgba(0, 0, 0, 0)',
-          //strokeColor: 'rgba(55, 85, 170, 0.6)',
-          lineWidth: 1
-        }
-      }
-    ));
+    // this.map.addObject(new H.map.Rect(bounds, {
+    //   style: {
+    //       fillColor: 'rgba(0, 0, 0, 0)',
+    //       //strokeColor: 'rgba(55, 85, 170, 0.6)',
+    //       lineWidth: 1
+    //     }
+    //   }
+    // ));
   }
 
   tryGetLocation() {
