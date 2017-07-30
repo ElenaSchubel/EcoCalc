@@ -49,6 +49,29 @@
         animation: popin 0.5s;
       }
 
+      .map-marker:after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 30px;
+        margin-bottom: 0;
+        left: 50%;
+        margin-left: -100px;
+        width: 200px;
+        background-color: #333;
+        padding: 7px;
+        border-radius: 5px;
+        text-align: center;
+        color: #ddd;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+
+      .map-marker:hover:after {
+        visibility: visible;
+        opacity: 1;
+        margin-bottom: 10px;
+      }
     </style>
 
 
