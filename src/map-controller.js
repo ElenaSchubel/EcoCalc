@@ -72,7 +72,7 @@ export default class MapController {
   }
 
   addMarkersToMap() {
-    var landfillIcon = new H.map.Icon('static/garbage.png');
+    var landfillIcon = new H.map.Icon('static/garbage-truck.png');
     var landfillMarker = new H.map.Marker({lng: 174.745253, lat: -41.325648}, { icon: landfillIcon });
     this.map.addObject(landfillMarker);
 
@@ -80,7 +80,7 @@ export default class MapController {
     var botanicalMarker = new H.map.Marker({lng: 174.7674514, lat: -41.2823079}, { icon: botanicalIcon });
     this.map.addObject(botanicalMarker);
 
-    var mtVictoriaIcon = new H.map.Icon('static/trekking3.png');
+    var mtVictoriaIcon = new H.map.Icon('static/hiker.png');
     var mtVictoriaMarker = new H.map.Marker({lng: 174.7798126, lat: -41.2987507}, { icon: mtVictoriaIcon });
     var golfClubMarker = new H.map.Marker({lng: 174.6724045, lat: -41.2899154}, { icon: mtVictoriaIcon });
     this.map.addObject(mtVictoriaMarker);
