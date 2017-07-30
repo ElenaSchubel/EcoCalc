@@ -37,10 +37,7 @@ export default class MapController {
 
   update() {
     this.updateStatsMarker()
-    if (!this.markers) {
-      this.addMarkersToMap();
-      this.markers = {}
-    }
+    this.addMarkersToMap()
   }
 
   updateStatsMarker() {
@@ -72,42 +69,76 @@ export default class MapController {
   }
 
   addMarkersToMap() {
-    var landfillIcon = new H.map.Icon('static/garbage-truck.png');
-    var landfillMarker = new H.map.Marker({lng: 174.745253, lat: -41.325648}, { icon: landfillIcon });
-    this.map.addObject(landfillMarker);
+    if (!this.markers) {
+      var landfillIcon = new H.map.Icon('static/garbage.png');
+      var landfillMarker = new H.map.Marker({lng: 174.745253, lat: -41.325648}, { icon: landfillIcon });
+      this.map.addObject(landfillMarker);
 
-    var botanicalIcon = new H.map.Icon('static/rainforest.png');
-    var botanicalMarker = new H.map.Marker({lng: 174.7674514, lat: -41.2823079}, { icon: botanicalIcon });
-    this.map.addObject(botanicalMarker);
+      var botanicalIcon = new H.map.Icon('static/rainforest.png');
+      var botanicalMarker = new H.map.Marker({lng: 174.7674514, lat: -41.2823079}, { icon: botanicalIcon });
+      this.map.addObject(botanicalMarker);
 
-    var mtVictoriaIcon = new H.map.Icon('static/hiker.png');
-    var mtVictoriaMarker = new H.map.Marker({lng: 174.7798126, lat: -41.2987507}, { icon: mtVictoriaIcon });
-    var golfClubMarker = new H.map.Marker({lng: 174.6724045, lat: -41.2899154}, { icon: mtVictoriaIcon });
-    this.map.addObject(mtVictoriaMarker);
-    this.map.addObject(golfClubMarker);
+      var mtVictoriaIcon = new H.map.Icon('static/trekking3.png');
+      var mtVictoriaMarker = new H.map.Marker({lng: 174.7798126, lat: -41.2987507}, { icon: mtVictoriaIcon });
+      var golfClubMarker = new H.map.Marker({lng: 174.6724045, lat: -41.2899154}, { icon: mtVictoriaIcon });
+      this.map.addObject(mtVictoriaMarker);
+      this.map.addObject(golfClubMarker);
 
-    var sanctuaryIcon = new H.map.Icon('static/sanctuary.png');
-    var sanctuaryMarker = new H.map.Marker({lng: 174.751167, lat: -41.2907781}, { icon: sanctuaryIcon });
-    this.map.addObject(sanctuaryMarker);
+      var sanctuaryIcon = new H.map.Icon('static/sanctuary.png');
+      var sanctuaryMarker = new H.map.Marker({lng: 174.751167, lat: -41.2907781}, { icon: sanctuaryIcon });
+      this.map.addObject(sanctuaryMarker);
 
-    var bikingIcon = new H.map.Icon('static/biking.png');
-    var bikingMarker = new H.map.Marker({lng: 174.7200583, lat: -41.2969469}, { icon: bikingIcon });
-    this.map.addObject(bikingMarker);
+      var bikingIcon = new H.map.Icon('static/biking.png');
+      var bikingMarker = new H.map.Marker({lng: 174.7200583, lat: -41.2969469}, { icon: bikingIcon });
+      this.map.addObject(bikingMarker);
 
-    var windmillIcon = new H.map.Icon('static/windmill.png');
-    var windmill1Marker = new H.map.Marker({lng: 174.755253, lat: -41.3144351}, { icon: windmillIcon });
-    var windmill2Marker = new H.map.Marker({lng: 174.6473962, lat: -41.2680318}, { icon: windmillIcon });
-    this.map.addObject(windmill1Marker);
-    this.map.addObject(windmill2Marker);
+      var windmillIcon = new H.map.Icon('static/windmill.png');
+      var windmill1Marker = new H.map.Marker({lng: 174.755253, lat: -41.3144351}, { icon: windmillIcon });
+      var windmill2Marker = new H.map.Marker({lng: 174.6473962, lat: -41.2680318}, { icon: windmillIcon });
+      this.map.addObject(windmill1Marker);
+      this.map.addObject(windmill2Marker);
 
-    var redRocksIcon = new H.map.Icon('static/redRocks.png');
-    var redRocksMarker = new H.map.Marker({lng: 174.724319, lat: -41.357485}, { icon: redRocksIcon });
-    this.map.addObject(redRocksMarker);
+      var redRocksIcon = new H.map.Icon('static/redRocks.png');
+      var redRocksMarker = new H.map.Marker({lng: 174.724319, lat: -41.357485}, { icon: redRocksIcon });
+      this.map.addObject(redRocksMarker);
 
-    var kiwiIcon = new H.map.Icon('static/kiwi.png');
-    var kiwiMarker = new H.map.Marker({lng: 174.727630, lat: -41.308127}, { icon: kiwiIcon });
-    this.map.addObject(kiwiMarker);
+      var kiwiIcon = new H.map.Icon('static/kiwi.png');
+      var kiwiMarker = new H.map.Marker({lng: 174.727630, lat: -41.308127}, { icon: kiwiIcon });
+      this.map.addObject(kiwiMarker);
 
+      this.markers = {}
+      this.markers.river = this.addmarker('static/river.png', {lng:174.7442 	, lat:-41.299 })
+      this.map.addObject(this.markers.river)
+
+      this.markers.ticket = this.addmarker('static/ticket1.png', {lng:174.775384, lat:-41.293715})
+      this.map.addObject(this.markers.ticket)
+
+      this.markers.landfill = this.addmarker('static/landfill.png', {lng: 174.745253, lat: -41.325648})
+      this.map.addObject(this.markers.landfill)
+
+      this.markers.marine = this.addmarker('static/dolphin.png', {lng:  174.774226, lat:-41.345420})
+      this.map.addObject(this.markers.marine)
+
+      this.markers.boat = this.addmarker('static/boat.png', {lng:174.782003 ,lat:-41.279916})
+      this.map.addObject(this.markers.boat)
+    }
+
+    console.log(this.waste(), this.money())
+
+    this.markers.river.setVisibility(this.waste() > 5)
+    this.markers.ticket.setVisibility(this.money() > 10)
+    this.markers.landfill.setVisibility(this.waste() >= 0)
+    this.markers.marine.setVisibility(this.waste() > 5)
+    this.markers.boat.setVisibility(this.money() > 100)
+  }
+
+  addmarker(icon,location,description){
+    var node = document.createElement('div')
+    node.classList.add('map-marker')
+    node.setAttribute("data-tooltip", description)
+    node.innerHTML=`<img src='${icon}'/>`
+    var icon = new H.map.DomIcon(node)
+    return new H.map.DomMarker(location, { icon })
   }
 
   restrictMap() {
@@ -151,5 +182,83 @@ export default class MapController {
       this.location = { lat: position.coords.latitude, lng: position.coords.longitude }
       this.update()
     });
+  }
+
+  currentMoney() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcMoney(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  money() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcMoney(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    return baseline - this.currentMoney()
+  }
+
+  currentTime() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  time() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    const seconds = baseline - this.currentTime()
+
+    return seconds / 3600
+  }
+
+  currentWaste() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  waste() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    return baseline - this.currentWaste()
+  }
+
+  currentCo2() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcCo2(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  co2() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcCo2(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    return (baseline - this.currentCo2()) / 1000
   }
 }
