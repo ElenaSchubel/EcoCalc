@@ -1,6 +1,8 @@
 <template>
   <div class="controls">
-    <p>Let's nut out ...</p>
+    <h1 class="logo"><img src="../assets/logo.png" /> EcoCalc</h1>
+
+    <p>What could you change about ...</p>
 
     <div v-for='group in groups' :key="group.title" class="group" :class="{ active: group.expanded && allBaselines(group) }">
       <h2 class="group-title">
@@ -32,6 +34,10 @@
         </div>
       </div>
     </div>
+
+    <div class="credits">
+      <span>All the awesome icons are from <a href="https://icons8.com">Icons8</a></span>
+    </div>
   </div>
 </template>
 
@@ -62,6 +68,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.logo {
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  color: #004663;
+}
+
+.logo > img {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+
 .controls {
   background-color: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
@@ -69,6 +88,8 @@ export default {
   width: 25%;
   min-width: 400px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .group {
@@ -171,5 +192,11 @@ export default {
   margin-left: -10px;
   border: 10px solid transparent;
   border-bottom-color: #ff9800;
+}
+
+.credits {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
 }
 </style>
