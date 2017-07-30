@@ -37,10 +37,7 @@ export default class MapController {
 
   update() {
     this.updateStatsMarker()
-    if (!this.markers) {
-      this.addMarkersToMap();
-      this.markers = {}
-    }
+    this.addMarkersToMap()
   }
 
   updateStatsMarker() {
@@ -72,21 +69,39 @@ export default class MapController {
   }
 
   addMarkersToMap() {
-    var riverIcon = new H.map.Icon('static/river.png')
-    var riverMarker = new H.map.Marker({lng:174.7442 	, lat:-41.299 }, {icon: riverIcon})
-    var ticketIcon = new H.map.Icon('static/ticket1.png')
-    var ticketMarker =  new H.map.Marker({lng:174.775384, lat:-41.293715}, {icon: ticketIcon})
-    var landfillIcon = new H.map.Icon('static/landfill.png');
-    var landfillMarker = new H.map.Marker({lng: 174.745253, lat: -41.325648}, { icon: landfillIcon });
-    var marineIcon = new H.map.Icon('static/dolphin.png');
-    var marineMarker = new H.map.Marker({lng:  174.774226, lat:-41.345420}, { icon: marineIcon });
-    var boatIcon = new H.map.Icon('static/boat.png');
-    var boatMarker = new H.map.Marker({lng:174.782003 ,lat:-41.279916}, { icon: boatIcon });
-    this.map.addObject(boatMarker)
-    this.map.addObject(marineMarker)
-    this.map.addObject(ticketMarker)
-    this.map.addObject(riverMarker)
-    this.map.addObject(landfillMarker)
+    if (!this.markers) {
+      this.markers = {}
+      this.markers.river = this.addmarker('static/river.png', {lng:174.7442 	, lat:-41.299 })
+      this.map.addObject(this.markers.river)
+
+      this.markers.ticket = this.addmarker('static/ticket1.png', {lng:174.775384, lat:-41.293715})
+      this.map.addObject(this.markers.ticket)
+
+      this.markers.landfill = this.addmarker('static/landfill.png', {lng: 174.745253, lat: -41.325648})
+      this.map.addObject(this.markers.landfill)
+
+      this.markers.marine = this.addmarker('static/dolphin.png', {lng:  174.774226, lat:-41.345420})
+      this.map.addObject(this.markers.marine)
+
+      this.markers.boat = this.addmarker('static/boat.png', {lng:174.782003 ,lat:-41.279916})
+      this.map.addObject(this.markers.boat)
+    }
+
+    console.log(this.waste(), this.money())
+
+    this.markers.river.setVisibility(this.waste() > 5)
+    this.markers.ticket.setVisibility(this.money() > 10)
+    this.markers.landfill.setVisibility(this.waste() >= 0)
+    this.markers.marine.setVisibility(this.waste() > 5)
+    this.markers.boat.setVisibility(this.money() > 100)
+  }
+
+  addmarker(icon,location,description){
+    var node = document.createElement('div')
+    node.classList.add('map-marker')
+    node.innerHTML=`<img src='${icon}'/>`
+    var icon = new H.map.DomIcon(node)
+    return new H.map.DomMarker(location, { icon })
   }
   restrictMap() {
     var bounds = new H.geo.Rect(-41.200035, 174.586065, -41.359314, 174.889477 );
@@ -129,5 +144,83 @@ export default class MapController {
       this.location = { lat: position.coords.latitude, lng: position.coords.longitude }
       this.update()
     });
+  }
+
+  currentMoney() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcMoney(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  money() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcMoney(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    return baseline - this.currentMoney()
+  }
+
+  currentTime() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  time() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    const seconds = baseline - this.currentTime()
+
+    return seconds / 3600
+  }
+
+  currentWaste() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  waste() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    return baseline - this.currentWaste()
+  }
+
+  currentCo2() {
+    return this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcCo2(item.current) : 0)
+      }, 0)
+    }, 0) * 52
+  }
+  co2() {
+    const baseline = this.$store.state.groups.reduce((total, group) => {
+      if (!group.expanded) return total;
+      return total + group.items.reduce((itemsTotal, item) => {
+        return itemsTotal + (item.baseline !== null ? item.calcCo2(item.baseline) : 0)
+      }, 0)
+    }, 0) * 52
+
+    return (baseline - this.currentCo2()) / 1000
   }
 }
