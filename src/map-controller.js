@@ -70,6 +70,42 @@ export default class MapController {
 
   addMarkersToMap() {
     if (!this.markers) {
+      var landfillIcon = new H.map.Icon('static/garbage.png');
+      var landfillMarker = new H.map.Marker({lng: 174.745253, lat: -41.325648}, { icon: landfillIcon });
+      this.map.addObject(landfillMarker);
+
+      var botanicalIcon = new H.map.Icon('static/rainforest.png');
+      var botanicalMarker = new H.map.Marker({lng: 174.7674514, lat: -41.2823079}, { icon: botanicalIcon });
+      this.map.addObject(botanicalMarker);
+
+      var mtVictoriaIcon = new H.map.Icon('static/trekking3.png');
+      var mtVictoriaMarker = new H.map.Marker({lng: 174.7798126, lat: -41.2987507}, { icon: mtVictoriaIcon });
+      var golfClubMarker = new H.map.Marker({lng: 174.6724045, lat: -41.2899154}, { icon: mtVictoriaIcon });
+      this.map.addObject(mtVictoriaMarker);
+      this.map.addObject(golfClubMarker);
+
+      var sanctuaryIcon = new H.map.Icon('static/sanctuary.png');
+      var sanctuaryMarker = new H.map.Marker({lng: 174.751167, lat: -41.2907781}, { icon: sanctuaryIcon });
+      this.map.addObject(sanctuaryMarker);
+
+      var bikingIcon = new H.map.Icon('static/biking.png');
+      var bikingMarker = new H.map.Marker({lng: 174.7200583, lat: -41.2969469}, { icon: bikingIcon });
+      this.map.addObject(bikingMarker);
+
+      var windmillIcon = new H.map.Icon('static/windmill.png');
+      var windmill1Marker = new H.map.Marker({lng: 174.755253, lat: -41.3144351}, { icon: windmillIcon });
+      var windmill2Marker = new H.map.Marker({lng: 174.6473962, lat: -41.2680318}, { icon: windmillIcon });
+      this.map.addObject(windmill1Marker);
+      this.map.addObject(windmill2Marker);
+
+      var redRocksIcon = new H.map.Icon('static/redRocks.png');
+      var redRocksMarker = new H.map.Marker({lng: 174.724319, lat: -41.357485}, { icon: redRocksIcon });
+      this.map.addObject(redRocksMarker);
+
+      var kiwiIcon = new H.map.Icon('static/kiwi.png');
+      var kiwiMarker = new H.map.Marker({lng: 174.727630, lat: -41.308127}, { icon: kiwiIcon });
+      this.map.addObject(kiwiMarker);
+
       this.markers = {}
       this.markers.river = this.addmarker('static/river.png', {lng:174.7442 	, lat:-41.299 })
       this.map.addObject(this.markers.river)
@@ -104,7 +140,7 @@ export default class MapController {
     return new H.map.DomMarker(location, { icon })
   }
   restrictMap() {
-    var bounds = new H.geo.Rect(-41.200035, 174.586065, -41.359314, 174.889477 );
+    var bounds = new H.geo.Rect(-41.200035, 174.586065, -41.369314, 174.889477 );
 
     this.map.getViewModel().addEventListener('sync', () => {
       var center = this.map.getCenter();

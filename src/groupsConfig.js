@@ -558,7 +558,7 @@ export default [{
       },
       {
         title: 'blankets',
-        questionPrefix: "How about a ",
+        questionPrefix: "How about ",
         questionSuffix: "?",
 
         calcMoney() {
