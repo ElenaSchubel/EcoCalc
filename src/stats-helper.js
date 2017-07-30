@@ -2,7 +2,7 @@ import some from "lodash/some"
 import every from "lodash/every"
 
 export function hasStats(groups) {
-  return some(groups, allBaselines)
+  return some(groups.filter(group => group.expanded), allBaselines)
 }
 
 export function allBaselines(group) {

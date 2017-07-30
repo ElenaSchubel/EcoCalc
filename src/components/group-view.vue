@@ -2,11 +2,15 @@
   <div class="controls">
     <p>Let's nut out ...</p>
 
-    <div v-for='group in groups' :key="group.title" class="group" :class="{ active: allBaselines(group) }">
+    <div v-for='group in groups' :key="group.title" class="group" :class="{ active: group.expanded && allBaselines(group) }">
       <h2 class="group-title">
         <button @click="toggleGroup(group.title)">{{group.title}}</button>
       </h2>
       <div class="items" v-show="group.expanded">
+        <p class="explanation" v-if="!allBaselines(group)">
+          Pick where you think you're at now, then see where you might be able to get to.
+        </p>
+
         <p class="explanation" v-if="allBaselines(group)">
           The yellow markers show where you're at right now. See what you could get with lower or higher amounts!
           <button class="reset" @click="resetGroup(group)">Start again</button>

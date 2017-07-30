@@ -19,7 +19,8 @@
     </div>
     <div class="stat">
       <img src="../assets/grass.png" />
-      <span :class="statClass(enviroImpact)">{{ formatPoints(enviroImpact) }}</span>
+      <span class="small" :class="statClass(waste)">{{ formatPoints(waste) }}kg waste</span>
+      <span class="small" :class="statClass(co2)">{{ formatPoints(co2) }}kg CO<sub>2</sub></span>
     </div>
   </div>
 
@@ -30,7 +31,8 @@
 </template>
 
 <script>
-import { hasStats } from "../stats-helper"
+import { hasStats, allBaselines } from "../stats-helper"
+import { formatCurrency, formatTime, formatPoints } from "../format-helper"
 
 export default {
   name: 'stats',
@@ -50,72 +52,87 @@ export default {
       }
       return ""
     },
-    formatCurrency(money) {
-      if (money >= 0) {
-        return "$" + money.toFixed(2)
-      } else {
-        return "-$" + Math.abs(money).toFixed(2)
-      }
-    },
-    formatTime(time) {
-      return "" + time.toFixed(2) + " hr"
-    },
-    formatPoints(points) {
-      if (points > 0) {
-        return "+" + points
-      } else {
-        return points.toString()
-      }
-    }
+    formatCurrency,
+    formatTime,
+    formatPoints
   },
   computed: {
-    money() {
-      const baseline = this.$store.state.groups.reduce((total, group) => {
-        return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcMoney(item.baseline) : 0)
-        }, 0)
-      }, 0)
-
-      const current = this.$store.state.groups.reduce((total, group) => {
+    currentMoney() {
+      return this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
           return itemsTotal + (item.baseline !== null ? item.calcMoney(item.current) : 0)
         }, 0)
-      }, 0)
-
-      return baseline - current
+      }, 0) * 52
     },
-    time() {
+    money() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.baseline) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcMoney(item.baseline) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
-      const current = this.$store.state.groups.reduce((total, group) => {
+      return baseline - this.currentMoney
+    },
+
+    currentTime() {
+      return this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
           return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.current) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
+    },
+    time() {
+      const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.baseline) : 0)
+        }, 0)
+      }, 0) * 52
 
-      const seconds = baseline - current
+      const seconds = baseline - this.currentTime
 
       return seconds / 3600
     },
 
-    enviroImpact() {
+    currentWaste() {
+      return this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.current) : 0)
+        }, 0)
+      }, 0) * 52
+    },
+    waste() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcEnviroImpact(item.baseline) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.baseline) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
 
-      const current = this.$store.state.groups.reduce((total, group) => {
+      return baseline - this.currentWaste
+    },
+
+    currentCo2() {
+      return this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcEnviroImpact(item.current) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcCo2(item.current) : 0)
         }, 0)
-      }, 0)
+      }, 0) * 52
+    },
+    co2() {
+      const baseline = this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcCo2(item.baseline) : 0)
+        }, 0)
+      }, 0) * 52
 
-      return baseline - current
+      return (baseline - this.currentCo2) / 1000
     }
   }
 
@@ -125,10 +142,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .stats-wrapper {
-  width: 550px;
-  height: 230px;
-  margin-top: -270px;
-  margin-left: -275px;
+  width: 650px;
+  height: 250px;
+  margin-top: -290px;
+  margin-left: -325px;
   background-color: #444;
   border-radius: 5px;
   display: flex;
@@ -188,7 +205,7 @@ export default {
 
 .minimise {
   position: absolute;
-  top: 10px;
+  top: -10px;
   right: 10px;
   margin-top: -270px;
   border: none;
@@ -233,7 +250,7 @@ export default {
   flex-direction: column;
   align-items: center;
   color: #ddd;
-  width: 170px;
+  width: 190px;
 }
 
 .stat:first-child {
@@ -251,6 +268,14 @@ export default {
 
 .stat > span {
   font-size: 2.25rem;
+}
+
+.stat > span.small {
+  font-size: 1.2rem;
+}
+
+.stat > span.average {
+  font-size: 0.8rem;
 }
 
 .stat .positive {
