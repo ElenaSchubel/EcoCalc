@@ -1,6 +1,13 @@
 export default [{
     title: 'waste',
     expanded: false,
+    averages: {
+      money: 98,
+      moneyDesc: "rubbish bags",
+      time: 11760 * 1.7,
+      waste: 254
+    },
+    // The average Wellingtonian spends "$x" per year on "rubbish bags"
     items: [
       {
         title: 'rubbish bags',
@@ -11,6 +18,8 @@ export default [{
 
         moneyMultiplier: 2.5,
         moneyMultiplierDesc: " per council rubbish bag",
+        timeMultiplier: " per week",
+        source: ["http://wellington.govt.nz/services/environment-and-waste/rubbish-and-recycling/rubbish/rubbish-bags"],
 
         calcMoney(current) {
           return current * 2.50
@@ -158,10 +167,10 @@ export default [{
       },
       {
         title: 'organic waste',
-        questionPrefix: "How many ",
-        questionSuffix: " do you fill per week?",
-        whatIfPrefix: "What if you used a different number of ",
-        whatIfSuffix: " per week ...",
+        questionPrefix: "How much of your ",
+        questionSuffix: " do you recycle?",
+        whatIfPrefix: "What if you recycled a different amount of ",
+        whatIfSuffix: "?",
 
         calcMoney() {
           return 0
@@ -210,6 +219,13 @@ export default [{
   {
     title: 'Transport',
     expanded: false,
+    averages: {
+      money: (2500 + 9000) / 2,
+      moneyDesc: "transport (about $2500 on public transport or $9000 using a car)",
+      time: 180 * 3600,
+      waste: 0,
+      co2: 765000
+    },
 
     items: [{
       title: 'walking or biking',
@@ -262,6 +278,11 @@ export default [{
         questionPrefix: "How many ",
         questionSuffix: " trips per day?",
 
+        moneyMultiplier: 5,
+        moneyMultiplierDesc: " average cost per trip (3 zones)",
+        timeMultiplier: " trips per day",
+        source: ["http://www.transport.govt.nz/ourwork/tmif/transport-volume/tv020/"],
+
 				calcMoney(trips) {
 					return trips * 5 * 7
 				},
@@ -310,8 +331,14 @@ export default [{
         title: 'car',
         questionPrefix: "How far do you go by ",
         questionSuffix: "?",
+
+        moneyMultiplier: 0.73,
+        moneyMultiplierDesc: " overall cost per km (IRD mileage)",
+        timeMultiplier: " km per day",
+        source: ["http://www.ird.govt.nz/business-income-tax/expenses/mileage-rates/emp-deductions-allowances-mileage.html", "http://www.aa.co.nz/assets/site-information/running-costs/2013-Petrol-Running-Costs.pdf"],
+
 				calcMoney(km) {
-					return km * 0.3 * 7
+					return km * 0.73 * 7
 				},
 
 				calcTimeSeconds(km) {
@@ -355,11 +382,23 @@ export default [{
   {
     title: 'heating',
     expanded: false,
+    averages: {
+      money: 630,
+      moneyDesc: "heating (up to $1300 depending on the type of heater you have)",
+      time: 0,
+      waste: 0,
+      co2: 1000000
+    },
 
     items: [{
         title: 'heat pump',
         questionPrefix: "How many hours do you use a ",
         questionSuffix: " per day?",
+
+        moneyMultiplier: 0.27,
+        moneyMultiplierDesc: " average cost per hour",
+        timeMultiplier: " hours per day",
+        source: ["https://www.energywise.govt.nz/tools/running-costs-calculator/#/heat-pump"],
 
         calcMoney(hours) {
           return hours * 0.27 * 7
@@ -411,6 +450,11 @@ export default [{
         questionPrefix: "How about ",
         questionSuffix: "?",
 
+        moneyMultiplier: 0.6,
+        moneyMultiplierDesc: " average cost per hour",
+        timeMultiplier: " hours per day",
+        source: ["https://www.energywise.govt.nz/at-home/heating-and-cooling/types-of-heater/electric-heating/"],
+
         calcMoney(hours) {
           return hours * 0.6 * 7
         },
@@ -461,6 +505,11 @@ export default [{
         title: 'wood fire',
         questionPrefix: "How about a ",
         questionSuffix: "?",
+
+        moneyMultiplier: 0.28,
+        moneyMultiplierDesc: " average cost per hour",
+        timeMultiplier: " hours per day",
+        source: ["https://www.consumer.org.nz/articles/firewood"],
 
         calcMoney(hours) {
           return hours * 0.28 * 7

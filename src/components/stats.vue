@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { hasStats } from "../stats-helper"
+import { hasStats, allBaselines } from "../stats-helper"
 import { formatCurrency, formatTime, formatPoints } from "../format-helper"
 
 export default {
@@ -57,6 +57,14 @@ export default {
     formatPoints
   },
   computed: {
+    currentMoney() {
+      return this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcMoney(item.current) : 0)
+        }, 0)
+      }, 0) * 52
+    },
     money() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
         if (!group.expanded) return total;
@@ -65,14 +73,16 @@ export default {
         }, 0)
       }, 0) * 52
 
-      const current = this.$store.state.groups.reduce((total, group) => {
+      return baseline - this.currentMoney
+    },
+
+    currentTime() {
+      return this.$store.state.groups.reduce((total, group) => {
         if (!group.expanded) return total;
         return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcMoney(item.current) : 0)
+          return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.current) : 0)
         }, 0)
       }, 0) * 52
-
-      return baseline - current
     },
     time() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
@@ -82,18 +92,19 @@ export default {
         }, 0)
       }, 0) * 52
 
-      const current = this.$store.state.groups.reduce((total, group) => {
-        if (!group.expanded) return total;
-        return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcTimeSeconds(item.current) : 0)
-        }, 0)
-      }, 0) * 52
-
-      const seconds = baseline - current
+      const seconds = baseline - this.currentTime
 
       return seconds / 3600
     },
 
+    currentWaste() {
+      return this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.current) : 0)
+        }, 0)
+      }, 0) * 52
+    },
     waste() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
         if (!group.expanded) return total;
@@ -102,16 +113,17 @@ export default {
         }, 0)
       }, 0) * 52
 
-      const current = this.$store.state.groups.reduce((total, group) => {
-        if (!group.expanded) return total;
-        return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcWasteKg(item.current) : 0)
-        }, 0)
-      }, 0) * 52
-
-      return baseline - current
+      return baseline - this.currentWaste
     },
 
+    currentCo2() {
+      return this.$store.state.groups.reduce((total, group) => {
+        if (!group.expanded) return total;
+        return total + group.items.reduce((itemsTotal, item) => {
+          return itemsTotal + (item.baseline !== null ? item.calcCo2(item.current) : 0)
+        }, 0)
+      }, 0) * 52
+    },
     co2() {
       const baseline = this.$store.state.groups.reduce((total, group) => {
         if (!group.expanded) return total;
@@ -120,14 +132,7 @@ export default {
         }, 0)
       }, 0) * 52
 
-      const current = this.$store.state.groups.reduce((total, group) => {
-        if (!group.expanded) return total;
-        return total + group.items.reduce((itemsTotal, item) => {
-          return itemsTotal + (item.baseline !== null ? item.calcCo2(item.current) : 0)
-        }, 0)
-      }, 0) * 52
-
-      return (baseline - current) / 1000
+      return (baseline - this.currentCo2) / 1000
     }
   }
 
@@ -137,10 +142,10 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .stats-wrapper {
-  width: 550px;
-  height: 230px;
-  margin-top: -270px;
-  margin-left: -275px;
+  width: 650px;
+  height: 250px;
+  margin-top: -290px;
+  margin-left: -325px;
   background-color: #444;
   border-radius: 5px;
   display: flex;
@@ -200,7 +205,7 @@ export default {
 
 .minimise {
   position: absolute;
-  top: 10px;
+  top: -10px;
   right: 10px;
   margin-top: -270px;
   border: none;
@@ -245,7 +250,7 @@ export default {
   flex-direction: column;
   align-items: center;
   color: #ddd;
-  width: 170px;
+  width: 190px;
 }
 
 .stat:first-child {
@@ -267,6 +272,10 @@ export default {
 
 .stat > span.small {
   font-size: 1.2rem;
+}
+
+.stat > span.average {
+  font-size: 0.8rem;
 }
 
 .stat .positive {
