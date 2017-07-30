@@ -198,5 +198,6 @@ export default {
   flex: 1;
   display: flex;
   align-items: flex-end;
+  margin-top: 20px;
 }
 </style>
